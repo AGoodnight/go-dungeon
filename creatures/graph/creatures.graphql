@@ -1,0 +1,31 @@
+type BaseCreature{
+    id:ID!
+    alive: Boolean
+    hitPoints: Int
+    initiative: Int
+    x: Int
+    y: Int
+    category:String
+    timeCreated:Long
+    timeModified:Long
+    name:String
+}
+
+type Creature implements BaseCreature{}
+
+type Player implements BaseCreature{
+    success:Boolean
+}
+
+input NewPlayer{
+    name:String!
+}
+
+input NewCreature{
+    name:String!
+}
+
+type Mutation {
+    createPlayer(input: NewPlayer): Player!
+    createCreature(input: NewPlayer): Creature!
+}
