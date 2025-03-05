@@ -7,10 +7,10 @@ import (
 )
 
 func main() {
-	creature := creatures.CreateCreature()
-	creature.Summon()
-	for creature.HitPoints > 0 {
-		board.Attack(creature, 1)
-		fmt.Println(creature.IsAlive())
+	critters := creatures.CreateCreatures(4)
+	for _, creature := range critters {
+		was := creature.HitPoints
+		board.Attack(&creature, 1)
+		fmt.Println("is", creature.HitPoints, "was:", was, creature.IsAlive())
 	}
 }
