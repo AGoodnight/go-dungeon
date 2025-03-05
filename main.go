@@ -1,16 +1,11 @@
 package main
 
 import (
-	"dungeon/board"
-	"dungeon/creatures"
-	"fmt"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	critters := creatures.CreateCreatures(4)
-	for _, creature := range critters {
-		was := creature.HitPoints
-		board.Attack(&creature, 1)
-		fmt.Println("is", creature.HitPoints, "was:", was, creature.IsAlive())
-	}
+	router := gin.Default()
+	router.GET("/creatures", GetCreatures)
+	router.Run("localhost:8080")
 }
