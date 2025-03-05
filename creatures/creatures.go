@@ -5,13 +5,17 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/goombaio/namegenerator"
 )
+
+var CreatureQuery = CreateCreatures(5)
 
 func CreateCreatures(amt int) (c []Creature) {
 	now := time.Now().UnixMicro() / int64(time.Millisecond)
 	creatures := []Creature{}
 
 	for amt > 0 {
+		seed := time.Now().UTC().UnixNano()
 		next := &Creature{
 			ID:           uuid.New().String(),
 			Alive:        true,
@@ -22,7 +26,7 @@ func CreateCreatures(amt int) (c []Creature) {
 			Category:     "Baddie",
 			TimeCreated:  now,
 			TimeModified: now,
-			Name:         "Monster",
+			Name:         namegenerator.NewNameGenerator(seed).Generate(),
 		}
 		creatures = append(creatures, *next)
 		amt--
